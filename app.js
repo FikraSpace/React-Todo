@@ -1,6 +1,24 @@
 // import UI lib to be used
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
+import styled from 'styled-components'
+
+let Input = styled.input`
+  width: 100%;
+  height: 40px;
+  border: 2px solid #000;
+  font-size: 1.5rem;
+`
+
+let MyButton = styled.button`
+  border: none;
+  background-color: red;
+  color: white;
+  padding: 10px;
+  
+`
+
+
 
 // Define a statuful components
 class Todos extends Component {
@@ -41,17 +59,27 @@ class Todos extends Component {
   render(){
     return (
       <div className="container">
-        <input type="text" value={this.state.inputValue} onKeyUp={this.onkeyup.bind(this)}  
+        <Input type="text" value={this.state.inputValue} onKeyUp={this.onkeyup.bind(this)}  
         onChange={this.oninputchange.bind(this)}/>
+
         {
           this.state.todos.map((item, i)=>{
-            return <div className="item" key={i}>{item.text}</div>
+            return <Todo item={item} key={i}/>
           })
         }
 
       </div>
     )
   }
+}
+
+function Todo(props) {
+  return (
+  <div>
+    <div className="item">{props.item.text}</div>
+    <MyButton>Remove</MyButton>
+  </div>
+  )
 }
 
 // Define a statless components
